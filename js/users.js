@@ -113,10 +113,39 @@ const usersArray = [
 // Obtener el body de la tabla
 const tableBody = document.getElementById('table-body')
 
-console.log(tableBody)
-// Iterar el array y agregar un tr por cada alumno que tengamos. 
+const searchInput = document.querySelector('#search') 
 
-usersArray.forEach(user => {
+//escuchar cuando el usuario selecciona una tecla en el input search
+//obtener el valor del input
+//buscar en todos los usuarios aquellos donde su nombre tengan este texto
+//pintar solo los usuarios que hayan coincidido
+searchInput.addEventListener ('keyup', (eventito) => {
+
+//buscar en todos los usuarios aquellos donde su nombre tengan ese texto
+
+const inputValue = eventito.target.value.toLowerCase()
+
+const usuariosFiltrados = 
+usersArray.filter((usuario) => {
+
+const nombre = usuario.fullname.toLowerCase()
+
+return nombre.includes(inputValue) 
+//no hace falta el if porque sino, es falso
+})
+
+//Pintar solo los usuarios que hayan coincidido
+pintarUsuarios(usuariosFiltrados)
+console.log(usuariosFiltrados)
+})
+
+
+
+
+function pintarUsuarios(arrayPintar) {
+  // Iterar el array y agregar un tr por cada alumno que tengamos. 
+  tableBody.innerHTML = ""
+  arrayPintar.forEach ((user, index) => {
 
     tableBody.innerHTML += `
     <tr class="table-body">
@@ -128,9 +157,30 @@ usersArray.forEach(user => {
         <td class="user-location">${user.location}</td>
         <td class="user-age">${user.age}</td>
         <td class="user-date">${formatDate (user.bornDate)}</td>
+        <td> 
+        <button class="action-btn btn-danger" title="Borrar usuario" onclick="borrarUsuario(${index})">
+        <i class="fa-solid fa-trash-can"></i>
+        </button>
     </tr>`
     //ahi en formatdate user.borndate lo que hice fue definir la funcion formatdate y despues le pongo el nombre fecha porque es lo mismo, le puedo poner el nombre que quiera
 })
+
+}
+
+pintarUsuarios(usersArray)
+
+
+function borrarUsuario (indice) {
+
+  usersArray.splice(indice, 1)
+  
+  pintarUsuarios(usersArray)
+}
+
+
+
+
+
 
 function formatDate (fecha) {
   const collator = new Intl.DateTimeFormat(`es-AR`, {

@@ -32,6 +32,7 @@ body {
     }
 }
 
+
 .user-table :is(th, td) {
     padding: 5px 10px;
         border: 1px solid rgb(244, 85, 188);
@@ -41,6 +42,7 @@ body {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .action-btn {
@@ -69,4 +71,44 @@ body {
         border-radius: 3px;
         border-bottom: 3px solid crimson;
     }
+}
+
+#user-form {
+    max-width: 430px;
+    padding: 15px;
+    background-color: #111;
+    margin-inline: auto;
+}
+.input-group {
+    margin: 0 auto;
+    margin-bottom: .75rem;
+    display: flex;
+    flex-direction: column;
+
+    :is(input, textarea, select) {
+        padding: .375rem .675rem;
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 3px;
+        border-bottom: 3px solid crimson;
+    }
+}
+
+.btn-form {
+    background-color: crimson;
+    color: white;
+    padding: .5rem .75rem;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+
+
+    &.btn-edit {
+        background-color: lightseagreen;
+    }
+
+}
+.mb {
+    margin-bottom: .75rem;
 }

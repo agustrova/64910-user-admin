@@ -134,18 +134,20 @@ if(el.password.value !== el.password2.value) {
   return
 }
 
-/*
+
 //si el email ya existe
 const emailExist = usersArray.find((user) => {
 if (user.email === el.email.value)
 return true
 })
 
-if(emailExist) {
-  alert(`El correo ya se encuentra registrado`)
+if(emailExist && el.id.value !== emailExist.id) {
+  swal.fire ({
+    title: "El correo ya existe",
+    icon: "error"
+  })
   return
 }
-*/
 
 /*
 let id 
@@ -261,7 +263,7 @@ function pintarUsuarios(arrayPintar) {
         <td class="user-age">${user.age}</td>
         <td class="user-date">${formatDate (user.bornDate)}</td>
         <td> 
-        <button class="action-btn btn-danger" title="Borrar usuario" onclick="borrarUsuario(${index})">
+        <button class="action-btn btn-danger" title="Borrar usuario" onclick="borrarUsuario('${user.id}', '${user.fullname} ')">
         <i class="fa-solid fa-trash-can"></i>
         </button>
         <button class="action-btn"
@@ -279,17 +281,17 @@ function pintarUsuarios(arrayPintar) {
 
 pintarUsuarios(usersArray)
 
+function borrarUsuario (ID, nombre) {
 
-function borrarUsuario (indice) {
+const confirmDelete = confirm (`Realmente desea borrar al usuario ${nombre}?`)
 
+if(confirmDelete) {
+  const indice = usersArray.findIndex(user => user.id === ID)
   usersArray.splice(indice, 1)
-  
   pintarUsuarios(usersArray)
 }
 
-
-
-
+}
 
 
 const objeto = {
@@ -368,8 +370,6 @@ submitBtn.innerText = 'Editar usuario'
 
 
 }
-
-
 
 
 /* 

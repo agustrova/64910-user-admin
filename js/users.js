@@ -1,4 +1,4 @@
-const usersArray = [
+const usersStart = [
     {
     fullname: 'John Doe',
     age: 30,
@@ -110,6 +110,16 @@ const usersArray = [
       image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/b/b7/Mk8iconbowser.png?width=325'
     }
 ];
+
+if (localStorage.getItem("users") === null) {
+
+  localStorage.setItem("users", JSON.stringify(usersStart))
+
+}
+
+// nosotros hardcodeamos usuarios y productos, porque eso se hace desde el backend
+const usersArray = JSON.parse(localStorage.getItem("users"))
+
 // Obtener el body de la tabla
 const tableBody = document.getElementById('table-body')
 const searchInput = document.querySelector('#search') 
@@ -205,10 +215,16 @@ if (el.id.value) {
 } else {
   //agregando un usuario nuevo
   usersArray.push(user)
-  Swal.fire('Usuario agregado', 'El usuario se creó correctamente', 'success')
+  Swal.fire({
+  title: 'Usuario Agregado',
+  text: 'Usuario se creo correctamente',
+  icon: 'success',
+  timer: 1000
+})
 }
 
 pintarUsuarios(usersArray)
+actualizarLocalStorage()
 resetearFormulario()
 } )
 
@@ -218,6 +234,7 @@ function resetearFormulario() {
   userForm.elements.password2.disabled = false 
   submitBtn.classList.remove ('btn-edit')
   submitBtn.innerText = 'Agregar usuario'
+  userForm.elements.nombreCompleto.focus()
 }
 
 // Filtro de usuarios
@@ -241,11 +258,10 @@ return nombre.includes(inputValue)
 
 //Pintar solo los usuarios que hayan coincidido
 pintarUsuarios(usuariosFiltrados)
-console.log(usuariosFiltrados)
 })
 
-
-
+//Llamo por primera vez que se ejecuta mi script la funcion pintar usuarios
+pintarUsuarios(usersArray)
 
 function pintarUsuarios(arrayPintar) {
   // Iterar el array y agregar un tr por cada alumno que tengamos. 
@@ -279,7 +295,13 @@ function pintarUsuarios(arrayPintar) {
 
 }
 
-pintarUsuarios(usersArray)
+
+
+function actualizarLocalStorage () {
+  localStorage.setItem("users", JSON.stringify(usersArray))
+}
+
+
 
 function borrarUsuario (ID, nombre) {
 
@@ -289,6 +311,7 @@ if(confirmDelete) {
   const indice = usersArray.findIndex(user => user.id === ID)
   usersArray.splice(indice, 1)
   pintarUsuarios(usersArray)
+  actualizarLocalStorage()
 }
 
 }

@@ -1,0 +1,16 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-wrapper {
+    padding: 2rem;
+    width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc9;
+
+    .login-title {
+        margin-bottom: 1rem;
+    }
+}

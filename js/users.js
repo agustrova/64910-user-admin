@@ -261,19 +261,6 @@ console.log(formatInputDate(userEdit.bornDate))
 submitBtn.classList.add('btn-edit')
 submitBtn.innerText = 'Editar usuario'
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

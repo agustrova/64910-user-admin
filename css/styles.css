@@ -17,6 +17,42 @@ body {
     color: white;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(29, 116, 203);
+    color: white;
+}
+.header .header-link {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    display: inline-block;
+
+    background-color: rgb(29, 116, 203);
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: rgb(19, 68, 117);
+    }
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    /* padding: 1rem 1.25rem; */
+
+    .user-profile-picure {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-inline: .75rem .25rem;
+    }
+}
+
 .user-table {
     width: 100%;
     border-collapse: collapse;
@@ -27,49 +63,25 @@ body {
         padding: 10px;
     }
     .table-body {
-        tr {
-            &:nth-child(even) {
-                background-color: #333;
-            }
+        .table-row {
+            
             td {
                 padding: 10px;
             }
         }
+        
     }
 }
-
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    background-color: dodgerblue;
-    color: white;
+.table-row:nth-child(even) {
+    background-color: #3d3d3d4a;
 }
-
-.header a {
-    color: white;
-    text-decoration: none;
-    padding: 1rem 1.25rem;
-    display: inline-block;
-    &:hover {
-        background-color: rgb(24, 85, 146);
-    }
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1.25rem;
-}
-
-
 
 .user-table :is(th, td) {
     padding: 5px 10px;
         border: 1px solid rgb(244, 85, 188);
 }
 
-.table-body .user-image img {
+.table-row .user-image img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -82,7 +94,7 @@ body {
     padding: .25rem;
     border-radius: 3px;
     cursor: pointer;
-
+    border: none;
     &:not(:last-child) {
         margin-right: 5px;
     }
@@ -94,6 +106,7 @@ body {
 
 .input-container {
     margin-bottom: .5rem;
+    
     .input {
         padding: .375rem .675rem;
         font-size: 1rem;
@@ -104,9 +117,14 @@ body {
     }
 }
 
+.admin-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: .5rem;
+}
 #user-form {
     max-width: 430px;
-    padding: 15px;
+    padding: 25px;
     background-color: #111;
     margin-inline: auto;
 }
@@ -136,10 +154,11 @@ body {
 
 
     &.btn-edit {
-        background-color: lightseagreen;
+        background-color: green;
     }
-
 }
+
+
 .mb {
     margin-bottom: .75rem;
 }
